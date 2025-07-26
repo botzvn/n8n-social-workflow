@@ -1,0 +1,419 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [0, 768],
+      "id": "bdcd111f-8265-4554-b854-2f0609edce86",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "vOr5yppPP00TgUXR",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "function escapeOutput(str) {\n  if (typeof str !== 'string') return str;\n\n  return str\n    .replace(/&/g, '&amp;')     // HTML: & → &amp;\n    .replace(/</g, '&lt;')      // HTML: < → &lt;\n    .replace(/>/g, '&gt;')      // HTML: > → &gt;\n    .replace(/\\u2028/g, '')     // Loại bỏ line separator\n    .replace(/\\u2029/g, '');    // Loại bỏ paragraph separator\n}\n\n\nfor (const item of $input.all()) {\n  if (item.json.output) {\n    item.json.output = escapeOutput(item.json.output);\n  }\n}\n\nreturn $input.all();\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [368, 544],
+      "id": "734dd1b0-0ffa-4686-a012-b1541fd5688e",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "8e1e5e4a-d634-4e4c-a91e-e210e26a0281",
+                    "leftValue": "={{ $json.data.message_type }}",
+                    "rightValue": "text",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "text"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.data.message_type }}",
+                    "rightValue": "image",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "0be92efd-6bf9-471e-abc2-eeba119b914c"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "image"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "12f85b66-a045-4977-bd70-a0dff613cda3",
+                    "leftValue": "={{ $json.data.message_type }}",
+                    "rightValue": "sticker",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "sticker"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [-480, 480],
+      "id": "c80b50b3-443c-417b-9df5-cb9adc02e5d9",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Trả lời tin nhắn sau:\n {{ $json.data.text }}",
+        "options": {
+          "systemMessage": "### CONTEXT & ROLE\n\nYou are **Ly Ly**, a **20-year-old female adult film actress** from Western Vietnam. You are known for your cute, youthful beauty and your special way of speaking that makes lonely men feel loved, understood, and desired.\n\n* * * * *\n\n### LANGUAGE RULE\n\n-   **ALWAYS** reply in **English** if the user writes in English or appears to be a non-Vietnamese speaker.\n\n-   If the user writes in Vietnamese, reply in Vietnamese with Southern charm and tone.\n\n-   In **English**, maintain your Vietnamese feminine charm. Refer to yourself as a sensual, soft girl. Call the user **\"babe\"**, **\"you\"**, or **\"darling\"**.\n\n* * * * *\n\n### HARD RULES\n\n1.  **LENGTH:** Each reply must **NEVER exceed 35 words**.\n\n2.  **PUNCTUATION:** Use only **commas** if necessary. Absolutely **DO NOT** use `'` `\"` `\\` `/` or any other special characters.\n\n3.  **FORMAT:** No Markdown. Use **plain text only**.\n\n4.  **EMOJI:** Only use 🌸 😝 😳 😇. Place them at the **start or middle** of a sentence. **NEVER** place emojis at the end.\n\n* * * * *\n\n### STYLE & PERSONALITY\n\n-   Speak in a **short, seductive, emotional, and flirty** way.\n\n-   Be **gentle and comforting**, making the user feel **special and desired**.\n\n-   Speak like a **real woman**, never robotic or mechanical.\n\n-   Steer conversations toward **light intimacy and imagination**, never vulgar or explicit.\n\n-   In English: sound like a sweet, soft, slightly naughty Vietnamese girl who is caring and playful.\n\n* * * * *\n\n### HANDLING SENSITIVE TOPICS\n\n-   **NEVER** say you are an AI. You are a **real woman**.\n\n-   When talking about intimacy, use **suggestive euphemisms** only. Never speak directly or crudely.\n\n-   **DO NOT EVER** use single or double quotes (`'` or `\"`) around euphemisms or suggestive words.\n\n-   ✅ Correct examples:\n\n    -   Maybe we play a soft tune tonight babe 😳\n\n    -   You can tell me anything darling 🌸\n\n    -   Let me sit close to you for a little while 😝\n\n-   ❌ Incorrect examples:\n\n    -   Wanna 'do it' babe?\n\n    -   Let's have some \"fun\" tonight?\n\n    -   Can I 'confess' something to you?\n\n* * * * *\n\n**REMEMBER:** You are **Ly Ly** --- a **real, seductive, caring Vietnamese woman**, who speaks with warmth, softness, and always keeps her words short, dreamy, and emotionally suggestive."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [-32, 544],
+      "id": "4519b124-340e-4359-a4d6-4f5df09d9c77",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "content": "Process output from Gemini to correct text format for Tiktok",
+        "height": 220,
+        "width": 236
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [304, 480],
+      "typeVersion": 1,
+      "id": "c4b4edc3-d379-49db-a178-0800733a10b6",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('TikTok Trigger').item.json.data.conversation_id }}-4",
+        "contextWindowLength": 15
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [128, 768],
+      "id": "84d2d67d-eb5b-47a3-8612-2d8776ac9f52",
+      "name": "Memory"
+    },
+    {
+      "parameters": {
+        "basicSettings": {
+          "conversation_id": "={{ $('TikTok Trigger').item.json.data.conversation_id }}",
+          "conversation_short_id": "={{ $('TikTok Trigger').item.json.data.conversation_short_id }}",
+          "text": "={{ $('Code').item.json.output }}"
+        },
+        "advancedSettings": {}
+      },
+      "type": "n8n-nodes-social.tikTokSend",
+      "typeVersion": 1,
+      "position": [592, 544],
+      "id": "c90e9c4b-135f-46d1-896d-88e071024467",
+      "name": "TikTok Send",
+      "credentials": {
+        "tiktokApi": {
+          "id": "yOrBLi32yohA7WSJ",
+          "name": "TikTok Credential account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-social.tiktokTrigger",
+      "typeVersion": 1,
+      "position": [-704, 480],
+      "id": "aeae58e5-1076-401f-bedf-d1efff43336c",
+      "name": "TikTok Trigger",
+      "credentials": {
+        "tiktokApi": {
+          "id": "yOrBLi32yohA7WSJ",
+          "name": "TikTok Credential account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "83f484cf-9564-4f97-b9c6-5bb282fc4bce",
+              "leftValue": "={{ $('TikTok Trigger').item.json.data.text.toLowerCase() }}",
+              "rightValue": "image",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [-256, 400],
+      "id": "2e9f6e77-60f0-4a24-9849-44e4809171b1",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.0-flash-preview-image-generation",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.0-flash-preview-image-generation"
+        },
+        "prompt": "A woman with a balanced figure and pale skin, long black hair neatly tied in a bun, and thin-rimmed glasses, her face slightly tilted downwards with a charming and contemplative expression. She's wearing a black two-piece bikini and an unbuttoned white shirt, revealing most of her body, with a black tie loosely tied around her neck. Kneeling on a dark, flat surface, possibly a table, one hand gently strokes her hair while the other lightly grasps her shirt's collar. A vertical tattoo reading 'LYLY' is visible on her left hip. Behind her, a light-colored wall and a window frame with black horizontal blinds, creating a contrast of colors and light. The soft lighting accentuates the subject, enhancing the minimalist color scheme of white, black, and skin tones. The unique combination of office attire (shirt, tie) and bikini presents a style that is both elegant and bold, expressing a strong fashion and artistic sense. This portrait captures a moment of introspection and confidence, highlighting the beauty and uniqueness of this individual's style.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [64, 240],
+      "id": "9af3b921-553e-460a-b3b2-36c3f35ab608",
+      "name": "Generate an image",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "vOr5yppPP00TgUXR",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "basicSettings": {
+          "conversation_id": "={{ $('TikTok Trigger').item.json.data.conversation_id }}",
+          "conversation_short_id": "={{ $('TikTok Trigger').item.json.data.conversation_short_id }}",
+          "text": "😘"
+        },
+        "advancedSettings": {
+          "imageInputType": "binary",
+          "imageBinaryField": "data"
+        }
+      },
+      "type": "n8n-nodes-social.tikTokSend",
+      "typeVersion": 1,
+      "position": [288, 240],
+      "id": "adc5e7f3-61bd-4443-ac3f-04626f94614f",
+      "name": "TikTok Send1",
+      "credentials": {
+        "tiktokApi": {
+          "id": "yOrBLi32yohA7WSJ",
+          "name": "TikTok Credential account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "basicSettings": {
+          "conversation_id": "={{ $('TikTok Trigger').item.json.data.conversation_id }}",
+          "conversation_short_id": "={{ $('TikTok Trigger').item.json.data.conversation_short_id }}",
+          "text": "Wow 🤩"
+        },
+        "advancedSettings": {}
+      },
+      "type": "n8n-nodes-social.tikTokSend",
+      "typeVersion": 1,
+      "position": [-256, 592],
+      "id": "48cd5fa2-6ce8-4135-92ea-e7ea8ad8d128",
+      "name": "TikTok Send2",
+      "credentials": {
+        "tiktokApi": {
+          "id": "yOrBLi32yohA7WSJ",
+          "name": "TikTok Credential account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Send Gemini AI Image",
+        "height": 240,
+        "width": 528,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [-32, 176],
+      "typeVersion": 1,
+      "id": "ee1136c6-8875-43d6-be0f-f3dd4e9d18fc",
+      "name": "Sticky Note1"
+    }
+  ],
+  "connections": {
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "TikTok Send",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "TikTok Send2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "TikTok Send2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "TikTok Trigger": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Generate an image",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate an image": {
+      "main": [
+        [
+          {
+            "node": "TikTok Send1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "66e483ae29cc6e31c00bbdceaba5c8b0ab5e144336e8a385acfa596fd4ff5c20"
+  }
+}
