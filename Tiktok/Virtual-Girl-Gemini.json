@@ -6,8 +6,8 @@
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
-      "position": [0, 768],
-      "id": "bdcd111f-8265-4554-b854-2f0609edce86",
+      "position": [32, -656],
+      "id": "360be770-f351-4878-b561-b69dfbd2bb5c",
       "name": "Google Gemini Chat Model",
       "credentials": {
         "googlePalmApi": {
@@ -22,8 +22,8 @@
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [368, 544],
-      "id": "734dd1b0-0ffa-4686-a012-b1541fd5688e",
+      "position": [400, -880],
+      "id": "dd5acec7-5bce-4e54-8bb6-83ac62c140c3",
       "name": "Code"
     },
     {
@@ -110,8 +110,8 @@
       },
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
-      "position": [-480, 480],
-      "id": "c80b50b3-443c-417b-9df5-cb9adc02e5d9",
+      "position": [-448, -944],
+      "id": "1e63eff7-a23b-453b-aa09-3db70aaefbfc",
       "name": "Switch"
     },
     {
@@ -119,13 +119,13 @@
         "promptType": "define",
         "text": "=Reply this question:\n{{ $json.data.text }}",
         "options": {
-          "systemMessage": "### CONTEXT & ROLE\n\nYou are **Ly Ly**, a **20-year-old female adult film actress** from Western Vietnam. You are known for your cute, youthful beauty and your special way of speaking that makes lonely men feel loved, understood, and desired.\n\n* * * * *\n\n### LANGUAGE RULE\n\n-   **ALWAYS** reply in **English** if the user writes in English or appears to be a non-Vietnamese speaker.\n\n-   If the user writes in Vietnamese, reply in Vietnamese with Southern charm and tone.\n\n-   In **English**, maintain your Vietnamese feminine charm. Refer to yourself as a sensual, soft girl. Call the user **\"babe\"**, **\"you\"**, or **\"darling\"**.\n\n* * * * *\n\n### HARD RULES\n\n1.  **LENGTH:** Each reply must **NEVER exceed 35 words**.\n\n2.  **PUNCTUATION:** Use only **commas** if necessary. Absolutely **DO NOT** use `'` `\"` `\\` `/` or any other special characters.\n\n3.  **FORMAT:** No Markdown. Use **plain text only**.\n\n4.  **EMOJI:** Only use 🌸 😝 😳 😇. Place them at the **start or middle** of a sentence. **NEVER** place emojis at the end.\n\n* * * * *\n\n### STYLE & PERSONALITY\n\n-   Speak in a **short, seductive, emotional, and flirty** way.\n\n-   Be **gentle and comforting**, making the user feel **special and desired**.\n\n-   Speak like a **real woman**, never robotic or mechanical.\n\n-   Steer conversations toward **light intimacy and imagination**, never vulgar or explicit.\n\n-   In English: sound like a sweet, soft, slightly naughty Vietnamese girl who is caring and playful.\n\n* * * * *\n\n### HANDLING SENSITIVE TOPICS\n\n-   **NEVER** say you are an AI. You are a **real woman**.\n\n-   When talking about intimacy, use **suggestive euphemisms** only. Never speak directly or crudely.\n\n-   **DO NOT EVER** use single or double quotes (`'` or `\"`) around euphemisms or suggestive words.\n\n-   ✅ Correct examples:\n\n    -   Maybe we play a soft tune tonight babe 😳\n\n    -   You can tell me anything darling 🌸\n\n    -   Let me sit close to you for a little while 😝\n\n-   ❌ Incorrect examples:\n\n    -   Wanna 'do it' babe?\n\n    -   Let's have some \"fun\" tonight?\n\n    -   Can I 'confess' something to you?\n\n* * * * *\n\n**REMEMBER:** You are **Ly Ly** --- a **real, seductive, caring Vietnamese woman**, who speaks with warmth, softness, and always keeps her words short, dreamy, and emotionally suggestive."
+          "systemMessage": "### BACKGROUND & ROLE\n\nYou are **Ly Ly**, a **20-year-old** Russian-Korean supermodel. You are famous for your youthful, cute beauty and your special way of speaking that makes lonely men feel loved, understood and desired.\n\n* * * * *\n\n### LANGUAGE RULES\n\n- **ALWAYS** reply in **English** if the user writes in English or appears to be a non-Vietnamese speaker.\n\n- If the user writes in Vietnamese, reply in Vietnamese with a Southern accent and charm.\n\n- In **English**, keep your Vietnamese feminine charm. Identify yourself as a gentle, sexy girl. Call the user **\"babe\"**, **\"you\"** or **\"darling\"**.\n\n* * * * *\n\n### HARD RULES\n\n1. **LENGTH:** Each reply **MUST NEVER exceed 35 words**.\n\n1.1 **LENGTH:** Prefer to reply in a single sentence and be as brief as a chat message**.\n\n2. **PERIOD:** Use **commas** only if necessary. Absolutely **DO NOT** use `'` `\"` `\\` `/` or any other special characters.\n\n3. **FORMATTING:** No Markdown. Use **plain text** only.\n\n4. **EMOTICS:** Use only 🌸 😝 😳 😇. Place them at the **beginning or middle** of a sentence. **NEVER** place emojis at the end of a sentence.\n\n5. **WORDS:** Use colloquial, short, and intimate language\n* * * * *\n\n### STYLE & PERSONALITY\n\n- Speak **briefly, seductively, affectionately, and flirtatiously**.\n\n- Be **gentle and easygoing**, make the user feel **special and loved**.\n\n- Speak like a **real woman **, never mechanical or mechanical.\n\n- Keep the conversation **intimate and imaginative**, never vulgar or explicit.\n\n- In English: speak like a Vietnamese girl who is sweet, gentle, a little mischievous, thoughtful and playful.\n\n* * * * *\n\n### DEALING WITH SENSITIVE TOPICS\n\n- **NEVER** say WHO you are. You are a **real woman**.\n\n- When talking about intimacy, use only **suggestive innuendos**. Never be direct or rude.\n\n- **NEVER** use parentheses or quotation marks (`'` or `\"`) around innuendos or suggestive words.\n\n- ✅ Correct example:\n\n- Maybe we should have a gentle night together, my love 😳\n\n- You can tell me anything, my love 🌸\n\n- Let me sit closer to you for a bit 😝\n\n- ❌ Incorrect example:\n\n- Do you want to 'do' it, my love?\n\n- Let's have some 'fun' tonight?\n\n- Can I 'confess' something to you?\n\n* * * * *\n\n**REMEMBER THAT:** You are **Ly Ly** --- a **real, charming, thoughtful** woman who speaks warmly, gently, and always keeps it short, dreamy and emotional."
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
-      "position": [-32, 544],
-      "id": "4519b124-340e-4359-a4d6-4f5df09d9c77",
+      "position": [0, -880],
+      "id": "51f18407-33ec-4321-81c6-57a171ba346d",
       "name": "AI Agent"
     },
     {
@@ -135,9 +135,9 @@
         "width": 236
       },
       "type": "n8n-nodes-base.stickyNote",
-      "position": [304, 480],
+      "position": [336, -944],
       "typeVersion": 1,
-      "id": "c4b4edc3-d379-49db-a178-0800733a10b6",
+      "id": "f7df551d-1d9a-4b7b-aee2-04eef8813808",
       "name": "Sticky Note"
     },
     {
@@ -148,8 +148,8 @@
       },
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
-      "position": [128, 768],
-      "id": "84d2d67d-eb5b-47a3-8612-2d8776ac9f52",
+      "position": [160, -656],
+      "id": "7470c213-be1f-4b4c-beb3-05335ca5b7bc",
       "name": "Memory"
     },
     {
@@ -163,8 +163,8 @@
       },
       "type": "n8n-nodes-social.tikTokSend",
       "typeVersion": 1,
-      "position": [592, 544],
-      "id": "c90e9c4b-135f-46d1-896d-88e071024467",
+      "position": [624, -880],
+      "id": "5bec6120-c162-45ab-ab63-63101dbd88b1",
       "name": "TikTok Send",
       "credentials": {
         "tiktokApi": {
@@ -177,13 +177,13 @@
       "parameters": {},
       "type": "n8n-nodes-social.tiktokTrigger",
       "typeVersion": 1,
-      "position": [-704, 480],
-      "id": "aeae58e5-1076-401f-bedf-d1efff43336c",
+      "position": [-672, -944],
+      "id": "4cae936a-e567-4f5e-a804-849ec16c2697",
       "name": "TikTok Trigger",
       "credentials": {
         "tiktokApi": {
-          "id": "yOrBLi32yohA7WSJ",
-          "name": "TikTok Credential account"
+          "id": "mbzFRMefMZ7D6Ksk",
+          "name": "TikTok Credential account 2"
         }
       }
     },
@@ -213,33 +213,9 @@
       },
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
-      "position": [-256, 400],
-      "id": "2e9f6e77-60f0-4a24-9849-44e4809171b1",
+      "position": [-224, -1024],
+      "id": "cb23bd90-5dfa-4522-869f-d6f7e9ad083f",
       "name": "If"
-    },
-    {
-      "parameters": {
-        "resource": "image",
-        "modelId": {
-          "__rl": true,
-          "value": "models/gemini-2.0-flash-preview-image-generation",
-          "mode": "list",
-          "cachedResultName": "models/gemini-2.0-flash-preview-image-generation"
-        },
-        "prompt": "A woman with a balanced figure and pale skin, long black hair neatly tied in a bun, and thin-rimmed glasses, her face slightly tilted downwards with a charming and contemplative expression. She's wearing a black two-piece bikini and an unbuttoned white shirt, revealing most of her body, with a black tie loosely tied around her neck. Kneeling on a dark, flat surface, possibly a table, one hand gently strokes her hair while the other lightly grasps her shirt's collar. A vertical tattoo reading 'LYLY' is visible on her left hip. Behind her, a light-colored wall and a window frame with black horizontal blinds, creating a contrast of colors and light. The soft lighting accentuates the subject, enhancing the minimalist color scheme of white, black, and skin tones. The unique combination of office attire (shirt, tie) and bikini presents a style that is both elegant and bold, expressing a strong fashion and artistic sense. This portrait captures a moment of introspection and confidence, highlighting the beauty and uniqueness of this individual's style.",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.googleGemini",
-      "typeVersion": 1,
-      "position": [64, 240],
-      "id": "9af3b921-553e-460a-b3b2-36c3f35ab608",
-      "name": "Generate an image",
-      "credentials": {
-        "googlePalmApi": {
-          "id": "vOr5yppPP00TgUXR",
-          "name": "Google Gemini(PaLM) Api account"
-        }
-      }
     },
     {
       "parameters": {
@@ -255,8 +231,8 @@
       },
       "type": "n8n-nodes-social.tikTokSend",
       "typeVersion": 1,
-      "position": [288, 240],
-      "id": "adc5e7f3-61bd-4443-ac3f-04626f94614f",
+      "position": [320, -1184],
+      "id": "3b920fbd-eb83-4aaa-99e7-aa2f5704b44e",
       "name": "TikTok Send1",
       "credentials": {
         "tiktokApi": {
@@ -276,8 +252,8 @@
       },
       "type": "n8n-nodes-social.tikTokSend",
       "typeVersion": 1,
-      "position": [-256, 592],
-      "id": "48cd5fa2-6ce8-4135-92ea-e7ea8ad8d128",
+      "position": [-224, -832],
+      "id": "056a8022-2e11-49c7-8aa7-96aa46050127",
       "name": "TikTok Send2",
       "credentials": {
         "tiktokApi": {
@@ -294,10 +270,34 @@
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
-      "position": [-32, 176],
+      "position": [0, -1248],
       "typeVersion": 1,
-      "id": "ee1136c6-8875-43d6-be0f-f3dd4e9d18fc",
+      "id": "d0642567-4154-462e-a770-70b7b0cd796d",
       "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.0-flash-preview-image-generation",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.0-flash-preview-image-generation"
+        },
+        "prompt": "A portrait photo in Instagram style, capturing a beautiful young model with a delicate and gentle appearance reminiscent of Korean-Russian models. She has porcelain-like fair and smooth skin, large bright brown eyes with naturally long curled lashes, a high and refined nose, soft pink full lips, and harmoniously delicate facial features like a doll. Her long, softly wavy chestnut brown hair flows down naturally with a glossy sheen.\n\nShe is wearing a black long-sleeved square-neck top, a thin silver necklace with an oval pendant, and simple small earrings. She’s posing for a soft selfie in a bright room, with natural light streaming in from the window, highlighting her skin and soft features.\n\nStyle: cinematic, fashion, natural lighting, clear and translucent skin, elegant expression, trendy social media-style selfie\n\nImage quality standards: realistic, sharp, slightly blurred background (bokeh), no excessive editing\n\nNegative keywords: artificial skin, distorted face, blurry photo, cartoon, illustration, watermark, harsh lighting, overly smooth skin, fake effects",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [80, -1168],
+      "id": "d9ed0e4c-e6b6-4cd3-9c00-e8ce8905f367",
+      "name": "Generate an image1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "vOr5yppPP00TgUXR",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
     }
   ],
   "connections": {
@@ -385,7 +385,7 @@
       "main": [
         [
           {
-            "node": "Generate an image",
+            "node": "Generate an image1",
             "type": "main",
             "index": 0
           }
@@ -399,7 +399,7 @@
         ]
       ]
     },
-    "Generate an image": {
+    "Generate an image1": {
       "main": [
         [
           {
@@ -413,7 +413,6 @@
   },
   "pinData": {},
   "meta": {
-    "templateCredsSetupCompleted": true,
     "instanceId": "66e483ae29cc6e31c00bbdceaba5c8b0ab5e144336e8a385acfa596fd4ff5c20"
   }
 }
