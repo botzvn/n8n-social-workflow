@@ -1,0 +1,177 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "multipleMethods": true,
+        "httpMethod": ["POST"],
+        "path": "zalo-bot",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [-304, 144],
+      "id": "0ccc9fb0-af57-4c20-a8b6-fdea39e124e4",
+      "name": "Webhook",
+      "webhookId": "f9c917c2-c7a6-41f8-b43a-06fe7777bbd4"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://bot-api.zapps.me/bot{{ $json.token }}/setWebhook",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "url",
+              "value": "={{ $json.url }}"
+            },
+            {
+              "name": "secret_token",
+              "value": "={{ $json.secret_token }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [112, -256],
+      "id": "2aa11b54-cb1e-459e-9e42-7f74005747cc",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3f0bae0c-a86e-48f0-988b-2de79190c0fb",
+              "name": "token",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "1c7197bc-d6f5-48e4-95e1-9a2c432e9ee2",
+              "name": "url",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "7419f1d4-f082-4b85-8a09-642fa0687534",
+              "name": "secret_token",
+              "value": "Secret_token",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [-112, -160],
+      "id": "4f6f48a5-54ee-416f-9c93-e5ed090b3aaa",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "content": "## Set Webhook",
+        "height": 288,
+        "width": 688
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [-416, -304],
+      "typeVersion": 1,
+      "id": "41f0a95b-77e9-4aac-b174-75968db0c5c1",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://bot-api.zapps.me/bot{{ $json.token }}/sendMessage",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "chat_id",
+              "value": "={{ $('Webhook').item.json.body.message.chat.id }}"
+            },
+            {
+              "name": "text",
+              "value": "={{ $('Webhook').item.json.body.message.text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [80, 128],
+      "id": "f5559c9c-8dd4-45f7-be63-8653cca56579",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [-336, -256],
+      "id": "1bfeeb99-e1cf-4a4a-b60d-ff4c1ab95c59",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "content": "## Nhận và gửi phản hồi",
+        "height": 320,
+        "width": 704,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [-416, 16],
+      "typeVersion": 1,
+      "id": "d841a26b-a7fb-49d5-a673-b07b2b99cee4",
+      "name": "Sticky Note1"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "9c4844a4c8192506e141ba7ad6539202f158eb3a04739d8504ae7c982f586d34"
+  }
+}
