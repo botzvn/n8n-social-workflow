@@ -1,0 +1,176 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "basicSettings": {
+          "conversation_id": "={{ $('TikTok Trigger').item.json.data.conversation_id }}",
+          "conversation_short_id": "={{ $('TikTok Trigger').item.json.data.conversation_short_id }}",
+          "text": "Hello from botzvn"
+        },
+        "advancedSettings": {}
+      },
+      "type": "n8n-nodes-social-tiktok.tikTokSend",
+      "typeVersion": 1,
+      "position": [-432, -368],
+      "id": "50ac355d-f397-4e38-b4fc-4c2fc004684b",
+      "name": "TikTok Send",
+      "credentials": {
+        "tiktokApi": {
+          "id": "wq7fvHU5n4au5ZAO",
+          "name": "TikTok account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-social-tiktok.tiktokTrigger",
+      "typeVersion": 1,
+      "position": [-656, -368],
+      "id": "8b4a9b27-aae4-4620-b26e-eab9deed6e78",
+      "name": "TikTok Trigger",
+      "credentials": {
+        "tiktokApi": {
+          "id": "wq7fvHU5n4au5ZAO",
+          "name": "TikTok account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "postSettings": {
+          "text": "Hello every body, botzvn",
+          "visibilityType": 0,
+          "allowComment": 1,
+          "scheduleTime": 1762495196
+        }
+      },
+      "type": "n8n-nodes-social-tiktok.tikTokUpload",
+      "typeVersion": 1,
+      "position": [-432, 80],
+      "id": "8590636a-905d-472c-a6dd-c17db409de21",
+      "name": "TikTok Upload",
+      "credentials": {
+        "tiktokApi": {
+          "id": "GLHM7GL4JWiNA7RE",
+          "name": "TikTok Credential account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "https://drive.google.com/file/d/1dKBORQ7uJa1ArL-gyzlj2kTRQ7rg_7m_/view?usp=sharing",
+          "mode": "url"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [-656, 80],
+      "id": "74f1293c-4b6e-4800-b515-d2e8aafde379",
+      "name": "Download file",
+      "credentials": {
+        "googleApi": {
+          "id": "TKzJcGzR41bdEjGD",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "### Receive and Send Message\n",
+        "height": 240,
+        "width": 544
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [-768, -448],
+      "typeVersion": 1,
+      "id": "7dca67c5-05ba-4fe7-a81a-84a84bb1209e",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "### Upload With Binary\n",
+        "height": 240,
+        "width": 544
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [-768, 0],
+      "typeVersion": 1,
+      "id": "8a8666c5-d1a3-4536-ad59-690ac9fe396c",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "### Upload With File Path\n",
+        "height": 224,
+        "width": 544
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [-768, -224],
+      "typeVersion": 1,
+      "id": "d77ca228-fdc3-4c88-8d13-4eb98d12beab",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "postSettings": {
+          "text": "Hello all, from botzvn",
+          "visibilityType": 0,
+          "allowComment": 1,
+          "scheduleTime": 1762408796
+        },
+        "videoInputType": "filepath",
+        "videoFilePath": "/Users/hieunv/Downloads/tik-video.mp4",
+        "coverInputType": "filepath",
+        "coverFilePath": "/Users/hieunv/Downloads/tik-thumb.jpg"
+      },
+      "type": "n8n-nodes-social-tiktok.tikTokUpload",
+      "typeVersion": 1,
+      "position": [-544, -160],
+      "id": "9c42b01a-ab30-405a-b5a0-2917a05ac878",
+      "name": "TikTok Upload File Path",
+      "credentials": {
+        "tiktokApi": {
+          "id": "wq7fvHU5n4au5ZAO",
+          "name": "TikTok account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "TikTok Trigger": {
+      "main": [
+        [
+          {
+            "node": "TikTok Send",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "TikTok Upload": {
+      "main": [[]]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "TikTok Upload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9c4844a4c8192506e141ba7ad6539202f158eb3a04739d8504ae7c982f586d34"
+  }
+}
