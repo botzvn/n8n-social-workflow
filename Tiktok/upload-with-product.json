@@ -1,0 +1,71 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "resource": "product"
+      },
+      "type": "n8n-nodes-social-tiktok.tiktokAll",
+      "typeVersion": 1,
+      "position": [-304, -176],
+      "id": "55f27569-8827-47fe-8eee-edba1fb60123",
+      "name": "Get Showcase Products",
+      "credentials": {
+        "tiktokApi": {
+          "id": "VSVRBOIF0sy2dF47",
+          "name": "thi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "postSettings": {
+          "text": "Nhìn cưng quá\n#xuhuong",
+          "visibilityType": 0,
+          "allowComment": 1,
+          "scheduleTime": "={{ Math.floor(Date.now() / 1000) + 24 * 60 * 60 }}",
+          "anchors": {
+            "anchor": [
+              {
+                "type": "product",
+                "productId": "={{ $json.products[1].product_id }}",
+                "displayName": "={{ $json.products[1].title }}"
+              }
+            ]
+          }
+        },
+        "videoInputType": "filepath",
+        "videoFilePath": "/Users/hieunv/Downloads/be-cung-2.mp4",
+        "coverInputType": "filepath",
+        "coverFilePath": "/Users/hieunv/Downloads/cover.jpg"
+      },
+      "type": "n8n-nodes-social-tiktok.tikTokUpload",
+      "typeVersion": 1,
+      "position": [-64, -176],
+      "id": "35cf174a-e2e9-4430-9764-864a1f21fce0",
+      "name": "TikTok Upload With Product",
+      "credentials": {
+        "tiktokApi": {
+          "id": "VSVRBOIF0sy2dF47",
+          "name": "thi"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Get Showcase Products": {
+      "main": [
+        [
+          {
+            "node": "TikTok Upload With Product",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "9c4844a4c8192506e141ba7ad6539202f158eb3a04739d8504ae7c982f586d34"
+  }
+}
